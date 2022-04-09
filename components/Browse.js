@@ -6,7 +6,6 @@ export default function Browse() {
   const url=`http://open-api.myhelsinki.fi/v1/events/`
 
   const [events, setEvents] = useState([])
-  const [search, setSearch] = useState('')
   
   const fetchEvents = () => {
     fetch(url)
@@ -18,10 +17,6 @@ export default function Browse() {
       Alert.alert('Error', "Something went wrong")
       )
   }
-
-
-
-
 
   return (
     <View style={{height: '100%'}}>
@@ -35,8 +30,6 @@ export default function Browse() {
         onPress={fetchEvents}
       />
     </View>
-
-
   );
 }
 
