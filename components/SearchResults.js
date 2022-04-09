@@ -20,6 +20,10 @@ export default function SearchResults({data}) {
       Alert.alert("No URL available")
     }  
   }
+
+  const openLocation = (lat, lon) => {
+    Linking.openURL(`https://maps.google.com/?q=${lat},${lon}`)
+  }
   
   const listSeparator = () => {
     return (
@@ -34,27 +38,30 @@ export default function SearchResults({data}) {
   };
 
   const renderItem =({item}) => (
-      <TouchableOpacity onPress={()=>setActiveItem(item.id)}>
-        <View style={{width: '100%'}} >
-          <View style={{flexDirection: 'row', alignItems: 'center', width: '120%'}}>
-            <View style={{flexDirection: 'column', alignItems: 'flex-start', marginBottom: 10, marginTop:10, width: '70%'}}>
-              <Text on style={{fontSize: 18, fontWeight: 'bold'}} >{item.name.fi}</Text>
-              {activeItem===item.id &&
-              (
-              <View>
-                <Text>{item.description.intro}</Text>
-                <TouchableOpacity onPress={()=>openURL(item.info_url)}>
-                  <Text style={styles.link}>Go to the website</Text>
-                </TouchableOpacity>
-              </View>
-              )}
+    <TouchableOpacity onPress={()=>setActiveItem(item.id)}>
+      <View style={{width: '100%'}} >
+        <View style={{flexDirection: 'row', alignItems: 'center', width: '120%'}}>
+          <View style={{flexDirection: 'column', alignItems: 'flex-start', marginBottom: 10, marginTop:10, width: '70%'}}>
+            <Text on style={{fontSize: 18, fontWeight: 'bold'}} >{item.name.fi}: {item.location.address.locality}</Text>
+            {activeItem===item.id &&
+            (
+            <View>
+              <Text>{item.description.intro}</Text>
+              <Text>Address: {item.location.address.street_address}, {item.location.address.locality}</Text>
+              <TouchableOpacity onPress={()=>openLocation(item.location.lat, item.location.lon)}>
+                <Text style={styles.link}>Open location in GoogleMaps</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>openURL(item.info_url)}>
+                <Text style={styles.link}>Go to the website</Text>
+              </TouchableOpacity>
             </View>
-          
-            <Button title="Add" onPress={addSelected(item.id)} style={{width: '30%'}}></Button>
+            )}
           </View>
-  
+        
+          <Button title="Add" onPress={addSelected(item.id)} style={{width: '30%'}}></Button>
         </View>
-      </TouchableOpacity>
+      </View>
+    </TouchableOpacity>
   )
 
   // const searchFilterFunction = (text) => {
