@@ -6,13 +6,16 @@ export default function Browse() {
   const url=`http://open-api.myhelsinki.fi/v1/events/`
 
   const [events, setEvents] = useState([])
+  const [rowVisible, setRowvisible] = useState(false)
   
   const fetchEvents = () => {
     fetch(url)
     .then(response => response.json())
     .then(data => {
-      setEvents(data.data)      
-    })
+      setEvents(data.data) 
+    },
+    setRowvisible(true)
+    )
     .catch(err=> 
       Alert.alert('Error', "Something went wrong")
       )
@@ -23,6 +26,7 @@ export default function Browse() {
       <Text style={{height: '30%'}}>search filters</Text>
       <SearchResults 
       data={events} 
+      rowVisible={rowVisible}
       style= {{
         height: '50%'}}/>
       <Button 

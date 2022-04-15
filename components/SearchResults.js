@@ -1,15 +1,25 @@
 import { StyleSheet, Text, View, FlatList, Linking, Button, Alert, TouchableOpacity , TextInput } from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import {Picker} from '@react-native-picker/picker';
 
-export default function SearchResults({data}) {
+export default function SearchResults({data, rowVisible}) {
+
 
   const [activeItem, setActiveItem] = useState('')
   const [keyword, setKeyword] = useState('')
-  const [masterData, setMasterData] = useState([data])
-  const [filteredData, setFilteredData] = useState([data])
+  const [datatoshow, setDatatoshow] = useState(data)
+  const [masterData, setMasterData] = useState(data)
+  const [filteredData, setFilteredData] = useState(data)
+  
+  const [sortby, setSortby] = useState('')
+  const [sortbylist, setSortbylist] = useState(['title', 'date' ])
+
+  
+
 
   const addSelected=(id)=> {
+    
     
   }
 
@@ -35,7 +45,18 @@ export default function SearchResults({data}) {
     } else{
       return (`${start_date} - ${end_date}, ${start_time}-${end_time}`)
     }
+  }
 
+  const sortlist = () => {
+
+    // if (sortby =="title") {
+    //   setDatatoshow(
+    //     data.sort((a,b) => {
+    //     return a.name -b.name
+    //   }))
+    // } else {
+
+    // }
   }
   
   const listSeparator = () => {
@@ -101,16 +122,33 @@ export default function SearchResults({data}) {
 
   return (
     <View style={styles.container}>
-        {/* <SearchBar
-          lightTheme
-          searchIcon={{ size: 20 }}
-          onChangeText={(text) => searchFilterFunction(text)}
-          onClear={(text) => searchFilterFunction('')}
-          placeholder="Type Here..."
-          value={keyword}
-        /> */}
+      {rowVisible && 
+      (
+        <View style={{flexDirection: 'row', alignItems: 'center', width: '90%'}}>
+          <SearchBar
+            lightTheme
+            searchIcon={{ size: 20 }}
+            onChangeText={(text) => searchFilterFunction(text)}
+            onClear={(text) => searchFilterFunction('')}
+            placeholder="Type Here..."
+            value={keyword}
+          />
+          <Text> sort by: </Text>
+          <Picker
+            style={{width: 120}}
+            selectedValue={sortby}
+            mode="dropdown"
+            onValueChange={value => setSortby(value) }>
+            {sortbylist.map((el)=> {
+              return (<Picker.Item label={el} value={el} key={el}/>)
+            })}
+          </Picker>
+          <Button title="sort" onPress={sortlist} style={{width: '30%'}}></Button>
+        </View>
+      )}
 
       <FlatList 
+        // data={datatoshow}
         data={data}
         keyExtractor ={item => item.id}
         ItemSeparatorComponent ={listSeparator}
