@@ -135,7 +135,7 @@ export default function SearchResults({data, rowVisible}) {
           />
           <Text> sort by: </Text>
           <Picker
-            style={{width: 120}}
+            style={{width: 100}}
             selectedValue={sortby}
             mode="dropdown"
             onValueChange={value => setSortby(value) }>

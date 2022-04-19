@@ -1,18 +1,24 @@
 import { StyleSheet, Text, View, Button} from 'react-native';
 import React, {useState} from 'react'
 import SearchResults from './SearchResults';
+import {Picker} from '@react-native-picker/picker';
 
 export default function Browse() {
-  const url=`http://open-api.myhelsinki.fi/v1/events/`
+  const eventsurl=`http://open-api.myhelsinki.fi/v1/events/`
+  const tagsearchurl = `https://open-api.myhelsinki.fi/v1/events/?tags_search=${selectedTag}`
 
   const [events, setEvents] = useState([])
-  const [rowVisible, setRowvisible] = useState(false)
+  const [rowVisible, setRowvisible] = useState(false) 
+  const [tags, setTags] = useState([])
+  const [selectedTag, setSelectedTag] = useState('')
   
   const fetchEvents = () => {
-    fetch(url)
+    fetch(eventsurl)
     .then(response => response.json())
     .then(data => {
       setEvents(data.data) 
+      setTags(data.tags)
+      
     },
     setRowvisible(true)
     )
@@ -21,13 +27,37 @@ export default function Browse() {
       )
   }
 
+  const findByTag =() => {
+    // fetch(tagsearchurl)
+    // .then(response => response.json())
+    // .then data
+
+  }
+
+
   return (
     <View style={{height: '100%'}}>
-      <Text style={{height: '30%'}}>search filters</Text>
+      <View style={{height: '30%'}}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Picker
+            style={{width: 150}}
+            selectedValue={selectedTag}
+            mode="dropdown"
+            onValueChange={value => setSelectedTag(value) }>
+            {Object.values(tags).map((tag)=> {
+              return (<Picker.Item label={tag} value={tag} key={tag}/>)
+            })}
+          </Picker>
+          <Button 
+            title="find"
+            onPress = {findByTag}
+          />
+        </View>
+      </View>
       <SearchResults 
-      data={events} 
-      rowVisible={rowVisible}
-      style= {{
+        data={events} 
+        rowVisible={rowVisible}
+        style= {{
         height: '50%'}}/>
       <Button 
         title="Find"
