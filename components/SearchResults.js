@@ -2,13 +2,14 @@ import { StyleSheet, Text, View, FlatList, Linking, Button, Alert, TouchableOpac
 import { SearchBar } from 'react-native-elements';
 import React, {useEffect, useState} from 'react'
 import {Picker} from '@react-native-picker/picker';
+import { useFocusEffect } from '@react-navigation/native'
 
 export default function SearchResults({data, rowVisible}) {
 
 
   const [activeItem, setActiveItem] = useState('')
   const [keyword, setKeyword] = useState('')
-  const [datatoshow, setDatatoshow] = useState(data)
+  const [datatoshow, setDatatoshow] = useState(null)
   const [masterData, setMasterData] = useState(data)
   const [filteredData, setFilteredData] = useState(data)
   
@@ -16,7 +17,9 @@ export default function SearchResults({data, rowVisible}) {
   const [sortbylist, setSortbylist] = useState(['title', 'date' ])
 
   
-
+  useFocusEffect(() => {
+    setDatatoshow(data);
+  });
 
   const addSelected=(id)=> {
     
@@ -48,6 +51,7 @@ export default function SearchResults({data, rowVisible}) {
   }
 
   const sortlist = () => {
+    console.log(data.length)
 
     // if (sortby =="title") {
     //   setDatatoshow(
@@ -71,8 +75,16 @@ export default function SearchResults({data, rowVisible}) {
     );
   };
 
+  const showhideitem =(id) => {
+    if (activeItem && activeItem==id) {
+      setActiveItem('')
+    } else {
+      setActiveItem(id)
+    }
+  }
+
   const renderItem =({item}) => (
-    <TouchableOpacity onPress={()=>setActiveItem(item.id)}>
+    <TouchableOpacity onPress={()=>showhideitem(item.id)}>
       <View style={{width: '100%'}} >
         <View style={{flexDirection: 'row', alignItems: 'center', width: '120%'}}>
           <View style={{flexDirection: 'column', alignItems: 'flex-start', marginBottom: 10, marginTop:10, width: '70%'}}>
@@ -149,7 +161,7 @@ export default function SearchResults({data, rowVisible}) {
 
       <FlatList 
         // data={datatoshow}
-        data={data}
+        data={datatoshow}
         keyExtractor ={item => item.id}
         ItemSeparatorComponent ={listSeparator}
         renderItem={renderItem}
