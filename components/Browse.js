@@ -6,10 +6,6 @@ import { useFocusEffect } from '@react-navigation/native';
 import * as Location from 'expo-location';
 
 export default function Browse() {
-  const eventsurl=`http://open-api.myhelsinki.fi/v1/events/`
-  // const tagsearchurl = `https://open-api.myhelsinki.fi/v1/events/?tags_search=${selectedTag}`
-
-
 
   const [allevents, setAllevents] = useState([])  
   const [eventsToShow, setEventsToShow] =  useState([])
@@ -26,9 +22,8 @@ export default function Browse() {
     language: ""
   })
 
-
   const lang = ["", "en", "fi", "sv"]
-
+  const eventsurl=`http://open-api.myhelsinki.fi/v1/events/`
   
   useEffect (()=> {
     (async () => {
@@ -60,10 +55,7 @@ export default function Browse() {
     },
     // setRowvisible(true)
     )
-    .catch(err=> 
-      Alert.alert('Error', "Something went wrong")
-      )
-    
+    .catch(err=> Alert.alert('Error', "Something went wrong") )    
   }
 
   const findByFilters =() => {
@@ -90,36 +82,12 @@ export default function Browse() {
     .then(response => response.json())
     .then(data => setEventsToShow(data.data))
     .catch(err=> Alert.alert('Error', "Something went wrong"))
-
-
-
-    console.log(filtersurl)
-
-
-
-    
-    // console.log("tag button")
-    // fetch(tagsearchurl)
-    // .then(response => response.json())
-    // .then(data=>setEventsToShow(data.data))
-    // .catch(err=>Alert.alert('Error', "Something went wrong"))
-
   }
-
 
 
   const showAll =() => {
     setEventsToShow(allevents)
-    // console.log(eventsToShow.length)
-    // console.log(location)
-
   }
-
-  const inputChanged = (event) => {
-    setFilters({...filters, [event.selectedValue]: event.target.value})
-  }
-
-
 
   return (
     <View style={{height: '100%'}}>
@@ -134,7 +102,6 @@ export default function Browse() {
             onPress={()=>setFiltersvisible(!filtersvisible)}
           />
         </View>
-
         <View>
         {/* https://www.raywenderlich.com/718-6-best-practices-for-mobile-app-search-filtering */}
           {filtersvisible && (
@@ -182,32 +149,14 @@ export default function Browse() {
               </View>
             </View>
             </View>
-
-
-
           )}
         </View>
-
-
-       
       </View>
       <SearchResults 
         data={eventsToShow} 
         rowVisible={rowVisible}
         style= {{
         height: '50%'}}/>
-     
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  
-});
-  

@@ -6,7 +6,6 @@ import { useFocusEffect } from '@react-navigation/native'
 
 export default function SearchResults({data, rowVisible}) {
 
-
   const [activeItem, setActiveItem] = useState('')
   const [keyword, setKeyword] = useState('')
   const [datatoshow, setDatatoshow] = useState(null)
@@ -15,7 +14,6 @@ export default function SearchResults({data, rowVisible}) {
   
   const [sortby, setSortby] = useState('')
   const [sortbylist, setSortbylist] = useState(['title', 'date' ])
-
   
   useFocusEffect(() => {
     setDatatoshow(data);
@@ -160,7 +158,6 @@ export default function SearchResults({data, rowVisible}) {
       )}
 
       <FlatList 
-        // data={datatoshow}
         data={datatoshow}
         keyExtractor ={item => item.id}
         ItemSeparatorComponent ={listSeparator}
