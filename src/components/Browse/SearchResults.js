@@ -3,6 +3,7 @@ import { SearchBar } from 'react-native-elements';
 import React, {useEffect, useState} from 'react'
 import {Picker} from '@react-native-picker/picker';
 import { useFocusEffect } from '@react-navigation/native'
+import FlatListItem from './FlatListItem';
 
 export default function SearchResults({data, rowVisible}) {
 
@@ -19,34 +20,7 @@ export default function SearchResults({data, rowVisible}) {
     setDatatoshow(data);
   });
 
-  const addSelected=(id)=> {
-    
-    
-  }
 
-  const openURL=(url) => {
-    if (url) {
-      Linking.openURL(url)
-    } else {
-      Alert.alert("No URL available")
-    }  
-  }
-
-  const openLocation = (lat, lon) => {
-    Linking.openURL(`https://maps.google.com/?q=${lat},${lon}`)
-  }
-
-  const parseDate =(start, end) => {
-    let start_date=(new Date(start)).toString().slice(0,16)
-    let end_date=(new Date(end)).toString().slice(0,16)
-    let start_time=(new Date(start)).toString().slice(16,21)
-    let end_time=(new Date(end)).toString().slice(16, 21)
-    if (start_date=== end_date) {
-      return (`${start_date}, ${start_time}-${end_time}`)
-    } else{
-      return (`${start_date} - ${end_date}, ${start_time}-${end_time}`)
-    }
-  }
 
   const sortlist = () => {
     console.log(data.length)
@@ -73,40 +47,34 @@ export default function SearchResults({data, rowVisible}) {
     );
   };
 
-  const showhideitem =(id) => {
-    if (activeItem && activeItem==id) {
-      setActiveItem('')
-    } else {
-      setActiveItem(id)
-    }
-  }
 
   const renderItem =({item}) => (
-    <TouchableOpacity onPress={()=>showhideitem(item.id)}>
-      <View style={{width: '100%'}} >
-        <View style={{flexDirection: 'row', alignItems: 'center', width: '120%'}}>
-          <View style={{flexDirection: 'column', alignItems: 'flex-start', marginBottom: 10, marginTop:10, width: '70%'}}>
-            <Text on style={{fontSize: 18, fontWeight: 'bold'}} >{item.name.fi}: {item.location.address.locality}</Text>
-            {activeItem===item.id &&
-            (
-            <View>
-              <Text>{item.description.intro}</Text>
-              <Text>When: {parseDate(item.event_dates.starting_day, item.event_dates.ending_day)}</Text>
-              <Text>Address: {item.location.address.street_address}, {item.location.address.locality}</Text>
-              <TouchableOpacity onPress={()=>openLocation(item.location.lat, item.location.lon)}>
-                <Text style={styles.link}>Open location in GoogleMaps</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={()=>openURL(item.info_url)}>
-                <Text style={styles.link}>Go to the website</Text>
-              </TouchableOpacity>
-            </View>
-            )}
-          </View>
+    <FlatListItem item = {item}/>
+    // <TouchableOpacity onPress={()=>showhideitem(item.id)}>
+    //   <View style={{width: '100%'}} >
+    //     <View style={{flexDirection: 'row', alignItems: 'center', width: '120%'}}>
+    //       <View style={{flexDirection: 'column', alignItems: 'flex-start', marginBottom: 10, marginTop:10, width: '70%'}}>
+    //         <Text on style={{fontSize: 18, fontWeight: 'bold'}} >{item.name.fi}: {item.location.address.locality}</Text>
+    //         {activeItem===item.id &&
+    //         (
+    //         <View>
+    //           <Text>{item.description.intro}</Text>
+    //           <Text>When: {parseDate(item.event_dates.starting_day, item.event_dates.ending_day)}</Text>
+    //           <Text>Address: {item.location.address.street_address}, {item.location.address.locality}</Text>
+    //           <TouchableOpacity onPress={()=>openLocation(item.location.lat, item.location.lon)}>
+    //             <Text style={styles.link}>Open location in GoogleMaps</Text>
+    //           </TouchableOpacity>
+    //           <TouchableOpacity onPress={()=>openURL(item.info_url)}>
+    //             <Text style={styles.link}>Go to the website</Text>
+    //           </TouchableOpacity>
+    //         </View>
+    //         )}
+    //       </View>
         
-          <Button title="Add" onPress={addSelected(item.id)} style={{width: '30%'}}></Button>
-        </View>
-      </View>
-    </TouchableOpacity>
+    //       <Button title="Add" onPress={addSelected(item.id)} style={{width: '30%'}}></Button>
+    //     </View>
+    //   </View>
+    // </TouchableOpacity>
   )
 
   // const searchFilterFunction = (text) => {

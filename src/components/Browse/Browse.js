@@ -117,9 +117,6 @@ export default function Browse() {
         {/* https://www.raywenderlich.com/718-6-best-practices-for-mobile-app-search-filtering */}
           {filtersvisible && (
 
-
-
-
             <View>
               <View style={{flexDirection: 'row', alignItems: 'center', width: '100%'}}>
                 <View style={{flexDirection: 'column', alignItems: 'flex-start', marginBottom: 10, marginTop:10, width: '70%'}}>
