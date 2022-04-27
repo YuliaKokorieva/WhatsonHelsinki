@@ -4,6 +4,7 @@ import SearchResults from './SearchResults';
 import {Picker} from '@react-native-picker/picker';
 import { useFocusEffect } from '@react-navigation/native';
 import * as Location from 'expo-location';
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
 export default function Browse() {
 
@@ -89,6 +90,16 @@ export default function Browse() {
     setEventsToShow(allevents)
   }
 
+  const updateFilterTag = (tagvalue) => {
+    setFilters({...filters, tag: tagvalue})
+  }
+  const updateFilterRadius = (radiusvalue) => {
+    setFilters({...filters, radius: radiusvalue})
+  }
+  const updateFilterLang = (langvalue) => {
+    setFilters({...filters, language: langvalue})
+  }
+
   return (
     <View style={{height: '100%'}}>
       <View style={{height: '30%'}}>
@@ -105,6 +116,10 @@ export default function Browse() {
         <View>
         {/* https://www.raywenderlich.com/718-6-best-practices-for-mobile-app-search-filtering */}
           {filtersvisible && (
+
+
+
+
             <View>
               <View style={{flexDirection: 'row', alignItems: 'center', width: '100%'}}>
                 <View style={{flexDirection: 'column', alignItems: 'flex-start', marginBottom: 10, marginTop:10, width: '70%'}}>
@@ -114,7 +129,7 @@ export default function Browse() {
                       style={{width: 150}}
                       selectedValue={filters.tag}
                       mode="dropdown"
-                      onValueChange={value => setFilters({...filters, tag: value}) }>
+                      onValueChange={updateFilterTag}>
                       {Object.values(tags).sort().map((tag)=> {
                         return (<Picker.Item label={tag} value={tag} key={tag}/>)
                       })}
@@ -124,7 +139,7 @@ export default function Browse() {
                     <Text>Find nearby: </Text>
                     <TextInput
                       value={filters.radius}
-                      onChangeText = {value => setFilters({...filters, radius: value}) }
+                      onChangeText = {updateFilterRadius}
                       keyboardType= 'numeric'
                       style = {{width: 60, borderColor: 'grey', borderWidth: 1, marginBottom: 30}}
                     />
@@ -135,7 +150,7 @@ export default function Browse() {
                       style={{width: 100}}
                       selectedValue={filters.language}
                       mode="dropdown"
-                      onValueChange={value => setFilters({...filters, language: value}) }>
+                      onValueChange={updateFilterLang}>
                       {lang.map((item, index)=> {
                         return (<Picker.Item label={item} value={item} key={index}/>)
                       })}

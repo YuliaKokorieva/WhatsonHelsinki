@@ -1,25 +1,14 @@
+
 import { Text, View, TextInput, Button, StyleSheet } from 'react-native';
-// import {database} from '../utils/firebaseconfig.js'
 import { getDatabase , push, ref, onValue } from 'firebase/database';
+import { initializeApp } from "firebase/app";
 import React, {useEffect, useState} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { initializeApp } from "firebase/app";
+import {firebaseApp} from '../../utils/FirebaseConfig'
 
-const firebaseConfig = {
-  apiKey: "AIzaSyA5ad2mTPWg-AlIe1TW3N3TzFguiVrZGak",
-  authDomain: "helsinkievents-29262.firebaseapp.com",
-  databaseURL: "https://helsinkievents-29262-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "helsinkievents-29262",
-  storageBucket: "helsinkievents-29262.appspot.com",
-  messagingSenderId: "1052815759476",
-  appId: "1:1052815759476:web:4fceb862855dbb766e1921"
-};
+export default function CreateEvent() {
 
-
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-
-export default function MyEvents() {
+  const database = getDatabase(firebaseApp);
 
   const [event, setEvent] = useState({
     title: "",
@@ -62,9 +51,11 @@ export default function MyEvents() {
     })
   }
 
+
+  
   return (
     <View>
-      <Text>My events</Text>
+      <Text>Create event</Text>
       <View style={styles.view_row}>
         <Text>Title: </Text>
         <TextInput 
@@ -117,9 +108,10 @@ export default function MyEvents() {
         title="Save event"
         onPress={saveEvent}
       />
-
     </View>
+
   )
+
 }
 
 const styles = StyleSheet.create({

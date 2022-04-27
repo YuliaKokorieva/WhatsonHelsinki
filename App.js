@@ -4,8 +4,8 @@ import { NavigationContainer } from'@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import MyEvents from './src/components/MyEvents';
-import Browse from './src/components/Browse';
+import MyEvents from './src/components/MyEvents/MyEvents.js';
+import Browse from './src/components/Browse/Browse.js';
 
 const Tab = createMaterialTopTabNavigator();
 
