@@ -4,7 +4,8 @@ import { getDatabase , push, ref, onValue } from 'firebase/database';
 import { initializeApp } from "firebase/app";
 import React, {useEffect, useState} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import {firebaseApp} from '../../utils/FirebaseConfig'
+import {firebaseApp} from '../../utils/FirebaseConfig';
+import saveEventFunc from '../Functions/saveEventFunc';
 
 export default function CreateEvent() {
 
@@ -30,17 +31,7 @@ export default function CreateEvent() {
   }, [])
 
   const saveEvent = () => {
-    push(
-      ref(database, 'HelsinkiEvents/'),
-        {
-          "title": event.title,
-          "description": event.description,
-          "start": event.start,
-          "duration": event.duration,
-          "address": event.address,
-          "url": event.url
-        }
-      )
+    saveEventFunc(event)
     setEvent({
       title: "",
       description: "",

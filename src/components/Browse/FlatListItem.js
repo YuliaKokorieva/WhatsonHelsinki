@@ -5,6 +5,7 @@ import Reac,  {useState} from 'react'
 export default function FlatListItem({item}) {
 
   const [activeItem, setActiveItem] = useState('')
+  const [shouldShow, setShouldShow] = useState(false)
 
   const addSelected=(id)=> {
     
@@ -35,22 +36,25 @@ export default function FlatListItem({item}) {
     }
   }
 
-  const showhideitem =(id) => {
-    if (activeItem && activeItem==id) {
-      setActiveItem('')
-    } else {
-      setActiveItem(id)
-    }    
-  }
+  
+
+
+  // const showhideitem =(id) => {
+  //   if (activeItem && activeItem==id) {
+  //     setActiveItem('')
+  //   } else {
+  //     setActiveItem(id)
+  //   }    
+  // }
   
   
   return (
-  <TouchableOpacity onPress={()=>showhideitem(item.id)}>
+  <TouchableOpacity onPress={()=>setShouldShow(!shouldShow)}>
     <View style={{width: '100%'}} >
       <View style={{flexDirection: 'row', alignItems: 'center', width: '120%'}}>
         <View style={{flexDirection: 'column', alignItems: 'flex-start', marginBottom: 10, marginTop:10, width: '70%'}}>
         <Text on style={{fontSize: 18, fontWeight: 'bold'}} >{item.name.fi}: {item.location.address.locality}</Text>
-          {activeItem===item.id &&
+          {shouldShow ? 
           (
             <View>
               <Text>{item.description.intro}</Text>
@@ -63,7 +67,8 @@ export default function FlatListItem({item}) {
                 <Text style={styles.link}>Go to the website</Text>
               </TouchableOpacity>
             </View>
-          )}
+          ) : null
+        }
         </View>
         
         <Button title="Add" onPress={addSelected(item.id)} style={{width: '30%'}}></Button>
