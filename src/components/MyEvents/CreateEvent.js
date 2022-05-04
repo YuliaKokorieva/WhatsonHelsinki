@@ -5,7 +5,8 @@ import { initializeApp } from "firebase/app";
 import React, {useEffect, useState} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import {firebaseApp} from '../../utils/FirebaseConfig';
-import saveEventFunc from '../Functions/saveEventFunc';
+import saveEventFunc from '../../utils/Functions/saveEventFunc.js';
+
 
 export default function CreateEvent() {
 

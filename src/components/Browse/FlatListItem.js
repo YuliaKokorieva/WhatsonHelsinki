@@ -1,14 +1,21 @@
 import { StyleSheet, Text, View, FlatList, Linking, Button, Alert, TouchableOpacity , TextInput } from 'react-native';
-import Reac,  {useState} from 'react'
-
+import React,  {useState} from 'react'
+import saveEventFunc from '../../utils/Functions/saveEventFunc';
 
 export default function FlatListItem({item}) {
 
   const [shouldShow, setShouldShow] = useState(false)
 
-  const addSelected=(item)=> {
-    
-    
+  const addSelected = (item)=> {
+    let eventToSave ={
+      title: item.name.fi,
+      description: item.description.intro,
+      start: item.event_dates.starting_day,
+      duration: "",
+      address: "",
+      url:item.info_url
+    }
+    saveEventFunc(eventToSave)      
   }
   
   const openURL=(url) => {
@@ -58,7 +65,7 @@ export default function FlatListItem({item}) {
           }
         </View>
         
-        <Button title="Add" onPress={addSelected(item)} style={{width: '30%'}}></Button>
+        <Button title="Add" onPress={()=>addSelected(item)} style={{width: '30%'}}></Button>
       </View>
     </View>
   </TouchableOpacity>

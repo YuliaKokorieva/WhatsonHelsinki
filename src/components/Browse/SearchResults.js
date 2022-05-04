@@ -50,31 +50,6 @@ export default function SearchResults({data, rowVisible}) {
 
   const renderItem =({item}) => (
     <FlatListItem item = {item}/>
-    // <TouchableOpacity onPress={()=>showhideitem(item.id)}>
-    //   <View style={{width: '100%'}} >
-    //     <View style={{flexDirection: 'row', alignItems: 'center', width: '120%'}}>
-    //       <View style={{flexDirection: 'column', alignItems: 'flex-start', marginBottom: 10, marginTop:10, width: '70%'}}>
-    //         <Text on style={{fontSize: 18, fontWeight: 'bold'}} >{item.name.fi}: {item.location.address.locality}</Text>
-    //         {activeItem===item.id &&
-    //         (
-    //         <View>
-    //           <Text>{item.description.intro}</Text>
-    //           <Text>When: {parseDate(item.event_dates.starting_day, item.event_dates.ending_day)}</Text>
-    //           <Text>Address: {item.location.address.street_address}, {item.location.address.locality}</Text>
-    //           <TouchableOpacity onPress={()=>openLocation(item.location.lat, item.location.lon)}>
-    //             <Text style={styles.link}>Open location in GoogleMaps</Text>
-    //           </TouchableOpacity>
-    //           <TouchableOpacity onPress={()=>openURL(item.info_url)}>
-    //             <Text style={styles.link}>Go to the website</Text>
-    //           </TouchableOpacity>
-    //         </View>
-    //         )}
-    //       </View>
-        
-    //       <Button title="Add" onPress={addSelected(item.id)} style={{width: '30%'}}></Button>
-    //     </View>
-    //   </View>
-    // </TouchableOpacity>
   )
 
   // const searchFilterFunction = (text) => {
