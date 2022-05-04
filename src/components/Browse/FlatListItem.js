@@ -4,10 +4,9 @@ import Reac,  {useState} from 'react'
 
 export default function FlatListItem({item}) {
 
-  const [activeItem, setActiveItem] = useState('')
   const [shouldShow, setShouldShow] = useState(false)
 
-  const addSelected=(id)=> {
+  const addSelected=(item)=> {
     
     
   }
@@ -35,18 +34,6 @@ export default function FlatListItem({item}) {
       return (`${start_date} - ${end_date}, ${start_time}-${end_time}`)
     }
   }
-
-  
-
-
-  // const showhideitem =(id) => {
-  //   if (activeItem && activeItem==id) {
-  //     setActiveItem('')
-  //   } else {
-  //     setActiveItem(id)
-  //   }    
-  // }
-  
   
   return (
   <TouchableOpacity onPress={()=>setShouldShow(!shouldShow)}>
@@ -68,10 +55,10 @@ export default function FlatListItem({item}) {
               </TouchableOpacity>
             </View>
           ) : null
-        }
+          }
         </View>
         
-        <Button title="Add" onPress={addSelected(item.id)} style={{width: '30%'}}></Button>
+        <Button title="Add" onPress={addSelected(item)} style={{width: '30%'}}></Button>
       </View>
     </View>
   </TouchableOpacity>
