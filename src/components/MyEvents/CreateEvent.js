@@ -4,7 +4,7 @@ import { getDatabase , push, ref, onValue } from 'firebase/database';
 import { initializeApp } from "firebase/app";
 import React, {useEffect, useState} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import {firebaseApp} from '../../utils/FirebaseConfig';
+import {firebaseApp} from '../../utils/firebaseconfig.js';
 import saveEventFunc from '../../utils/Functions/saveEventFunc.js';
 
 
