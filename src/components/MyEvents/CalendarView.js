@@ -47,11 +47,8 @@ export default function CalendarView() {
       <View style={styles.container}>
         <EventCalendar
           eventTapped={eventClicked}
-          // Function on event press
           events={events}
-          // Passing the Array of event
           width={width}
-          // Container width
           size={60}
           // number of date will render before and after initDate
           // (default is 30 will render 30 day before initDate

@@ -1,47 +1,12 @@
-import { StyleSheet, Text, View, FlatList, Linking, Button, Alert, TouchableOpacity , TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import React,  {useState} from 'react'
-import saveEventFunc from '../../utils/Functions/saveEventFunc';
+
+import {openURL, openLocation, parseDate, addSelected} from '../../utils/Functions/helpersFunctions';
 
 export default function FlatListItem({item}) {
 
   const [shouldShow, setShouldShow] = useState(false)
-
-  const addSelected = (item)=> {
-    let eventToSave ={
-      title: item.name.fi,
-      description: item.description.intro,
-      start: item.event_dates.starting_day,
-      duration: "",
-      address: "",
-      url:item.info_url
-    }
-    saveEventFunc(eventToSave)      
-  }
-  
-  const openURL=(url) => {
-    if (url) {
-      Linking.openURL(url)
-    } else {
-      Alert.alert("No URL available")
-    }  
-  }
-  
-  const openLocation = (lat, lon) => {
-    Linking.openURL(`https://maps.google.com/?q=${lat},${lon}`)
-  }
-  
-  const parseDate =(start, end) => {
-    let start_date=(new Date(start)).toString().slice(0,16)
-    let end_date=(new Date(end)).toString().slice(0,16)
-    let start_time=(new Date(start)).toString().slice(16,21)
-    let end_time=(new Date(end)).toString().slice(16, 21)
-    if (start_date=== end_date) {
-      return (`${start_date}, ${start_time}-${end_time}`)
-    } else{
-      return (`${start_date} - ${end_date}, ${start_time}-${end_time}`)
-    }
-  }
-  
+ 
   return (
   <TouchableOpacity onPress={()=>setShouldShow(!shouldShow)}>
     <View style={{width: '100%'}} >
@@ -64,7 +29,6 @@ export default function FlatListItem({item}) {
           ) : null
           }
         </View>
-        
         <Button title="Add" onPress={()=>addSelected(item)} style={{width: '30%'}}></Button>
       </View>
     </View>

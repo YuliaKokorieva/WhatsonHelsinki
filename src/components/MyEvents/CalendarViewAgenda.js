@@ -1,20 +1,35 @@
-import React, {useState, Fragment, useCallback, useMemo} from 'react';
-import { Text, View, TextInput, Button, StyleSheet } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { Text, View, StyleSheet } from 'react-native';
 import {Agenda} from 'react-native-calendars';
 import { TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-elements';
-
-
-
-
+import getEventsFromFirebaseFunc from '../../utils/Functions/firebaseGetAllEvents';
 
 export default function CalendarViewAgenda() {
+  
+  const [eventsToShow, setEventsToShow] = useState({})
+
   const [items, setItems] = useState({
-    '2022-05-07': [{name: 'item 1 - any js object'}],
-    '2022-05-08': [{name: 'item 2 - any js object', height: 80}],
-    '2022-05-09': [],
-    '2022-05-10': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
-    })
+    '2022-05-25': [{
+      title: 'Puuhakeskiviikko', 
+      description: 'Puuhakeskiviikko koululaisille', 
+      start: '2022-05-25T11:00:00.000Z', 
+      end: '', 
+      url: '', 
+      location: {
+        lat: '', 
+        lon: ''}}],
+      
+    '2022-05-26': [{
+      title: 'Kardo Shiwan: FUR', 
+      description: 'Onko karva evolutiivinen jäänne? Mikä on karvan tulevaisuus? Taiteilija Kardo Shiwanin mielestä karvan avulla voimme tutkia itseämme, historiaamme ja kulttuuriamme.', 
+      start: '2022-05-26T16:00:00.000Z', 
+      end: '', 
+      url: 'http://www.caisa.fi/fi/tapahtumat/event/D954543528AD75937DC26D5DB1AA10D3/Kardo_Shiwan_FUR', 
+      location: {
+        lat: '60.21747970581055', 
+        lon: '24.809919357299805'}}],
+       })
   // const [items, setItems] = useState({})
 
   const timeToString = (time) => {
@@ -22,6 +37,24 @@ export default function CalendarViewAgenda() {
     return date.toISOString().split('T')[0];
   };
 
+  useEffect(()=> {
+
+    getData()
+  },[])
+
+  const getData = () => {
+    let rawEvents = getEventsFromFirebaseFunc()
+    console.log(rawEvents)
+    const reducedEvents = rawEvents.reduce((acc, currentEvent) => {
+      const {start, ...item} = currentEvent
+      acc[start.split('T')[0]]=[item]
+      return acc
+    }, {},
+    )
+    setEventsToShow(reducedEvents)
+    console.log(eventsToShow)
+  }
+  
   const renderItem = (item) => {
 
     return (
@@ -33,7 +66,7 @@ export default function CalendarViewAgenda() {
               justifyContent: 'space-between',
               alignItems: 'center',
               }}>
-              <Text>{item.name}</Text>
+              <Text>{title.name}</Text>
             </View>
           </Card>
          </TouchableOpacity>

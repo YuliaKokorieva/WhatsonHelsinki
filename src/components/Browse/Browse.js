@@ -1,10 +1,8 @@
-import { StyleSheet, Text, View, Button, Alert, TouchableOpacity, TextInput} from 'react-native';
+import { Text, View, Button, Alert, TextInput} from 'react-native';
 import React, {useState, useEffect} from 'react'
 import SearchResults from './SearchResults';
 import {Picker} from '@react-native-picker/picker';
-import { useFocusEffect } from '@react-navigation/native';
 import * as Location from 'expo-location';
-import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
 export default function Browse() {
 

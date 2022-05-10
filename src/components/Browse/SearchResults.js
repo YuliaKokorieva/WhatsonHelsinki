@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, FlatList, Linking, Button, Alert, TouchableOpacity , TextInput } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Button,} from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Picker} from '@react-native-picker/picker';
 import { useFocusEffect } from '@react-navigation/native'
 import FlatListItem from './FlatListItem';
@@ -19,8 +19,6 @@ export default function SearchResults({data, rowVisible}) {
   useFocusEffect(() => {
     setDatatoshow(data);
   });
-
-
 
   const sortlist = () => {
     console.log(data.length)
@@ -46,7 +44,6 @@ export default function SearchResults({data, rowVisible}) {
       />
     );
   };
-
 
   const renderItem =({item}) => (
     <FlatListItem item = {item}/>

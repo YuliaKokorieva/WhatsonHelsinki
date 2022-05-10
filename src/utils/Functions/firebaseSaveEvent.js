@@ -1,15 +1,17 @@
-import { getDatabase , push, ref, onValue } from 'firebase/database';
+import { getDatabase , push, ref } from 'firebase/database';
 import firebaseApp from '../firebaseconfig.js';
 
-export default function saveEventFunc(event) {
+export default function firebaseSaveEvent(event) {
   const database = getDatabase(firebaseApp);
   push(
     ref(database, 'HelsinkiEvents/'),
       {
+        "id": event.id,
         "title": event.title,
         "description": event.description,
         "start": event.start,
-        "duration": event.duration,
+        "end": event.end,
+        "location": event.location,
         "address": event.address,
         "url": event.url
       }

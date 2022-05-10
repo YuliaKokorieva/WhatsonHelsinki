@@ -1,49 +1,45 @@
-
 import { Text, View, TextInput, Button, StyleSheet } from 'react-native';
 import { getDatabase , push, ref, onValue } from 'firebase/database';
 import { initializeApp } from "firebase/app";
 import React, {useEffect, useState} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import {firebaseApp} from '../../utils/firebaseconfig.js';
-import saveEventFunc from '../../utils/Functions/saveEventFunc.js';
-
+import firebaseSaveEvent from '../../utils/Functions/firebaseSaveEvent.js';
 
 export default function CreateEvent() {
 
   const database = getDatabase(firebaseApp);
 
+  const [duration, setDuration] = useState('')
+
   const [event, setEvent] = useState({
+    id: "",
     title: "",
     description: "",
     start: "",
-    duration: "",
+    end: "",
+    location: "",
     address: "",
     url: ""
   })
-  const [events, setEvents] = useState([])
 
-  useEffect(()=> {
-    const eventsRef = ref(database, 'HelsinkiEvents/')
-    onValue(eventsRef, (snapshot)=> {
-      if (snapshot) {
-        setEvents(Object.values(snapshot.val()))
-      }
-    })
-  }, [])
+  const parseDuration = (start, duration) => {
+    
+  }
 
   const saveEvent = () => {
-    saveEventFunc(event)
+    firebaseSaveEvent(event)
     setEvent({
+      id: "",
       title: "",
       description: "",
       start: "",
-      duration: "",
+      end: "",
+      location: "",
       address: "",
       url: ""
     })
   }
-
-
   
   return (
     <View>
@@ -75,8 +71,8 @@ export default function CreateEvent() {
       <View style={styles.view_row}>
         <Text>Duration (mins): </Text>
         <TextInput 
-          value = {event.duration}
-          onChangeText={(duration) => setEvent({...event, duration: duration})}
+          value = {duration}
+          onChangeText={(duration) => setDuration(duration)}
           style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
         />
       </View>
@@ -101,9 +97,7 @@ export default function CreateEvent() {
         onPress={saveEvent}
       />
     </View>
-
   )
-
 }
 
 const styles = StyleSheet.create({
