@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-elements';
 import getEventsFromFirebaseFunc from '../../utils/Functions/firebaseGetAllEvents';
 
-export default function CalendarViewAgenda() {
+export default function AgendaComponent() {
   
   const [eventsToShow, setEventsToShow] = useState({})
 

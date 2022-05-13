@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import { NavigationContainer } from'@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import MyEvents from './src/components/MyEvents/MyEvents.js';
-import Browse from './src/components/Browse/Browse.js';
+import MyEventsView from './src/components/MyEvents/MyEventsView.js';
+import BrowseView from './src/components/Browse/BrowseView.js';
 
 
 const Tab = createMaterialTopTabNavigator();
@@ -14,8 +14,8 @@ export default function App() {
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="My Events" component={MyEvents} />
-          <Tab.Screen name="Browse" component={Browse} />
+          <Tab.Screen name="My Events" component={MyEventsView} />
+          <Tab.Screen name="Browse" component={BrowseView} />
         </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaView>

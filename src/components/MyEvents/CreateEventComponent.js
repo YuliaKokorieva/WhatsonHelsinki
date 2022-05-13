@@ -6,7 +6,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import {firebaseApp} from '../../utils/firebaseconfig.js';
 import firebaseSaveEvent from '../../utils/Functions/firebaseSaveEvent.js';
 
-export default function CreateEvent() {
+export default function CreateEventComponent() {
 
   const database = getDatabase(firebaseApp);
 

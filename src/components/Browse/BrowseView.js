@@ -1,10 +1,10 @@
 import { Text, View, Button, Alert, TextInput} from 'react-native';
 import React, {useState, useEffect} from 'react'
-import SearchResults from './SearchResults';
+import SearchResultsComp from './SearchResultsComp';
 import {Picker} from '@react-native-picker/picker';
 import * as Location from 'expo-location';
 
-export default function Browse() {
+export default function BrowseView() {
 
   const [allevents, setAllevents] = useState([])  
   const [eventsToShow, setEventsToShow] =  useState([])
@@ -162,7 +162,7 @@ export default function Browse() {
           )}
         </View>
       </View>
-      <SearchResults 
+      <SearchResultsComp 
         data={eventsToShow} 
         rowVisible={rowVisible}
         style= {{

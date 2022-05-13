@@ -3,9 +3,9 @@ import { SearchBar } from 'react-native-elements';
 import React, {useState} from 'react'
 import {Picker} from '@react-native-picker/picker';
 import { useFocusEffect } from '@react-navigation/native'
-import FlatListItem from './FlatListItem';
+import FlatListItemComp from './FlatListItemComp.js';
 
-export default function SearchResults({data, rowVisible}) {
+export default function SearchResultsComp({data, rowVisible}) {
 
   const [activeItem, setActiveItem] = useState('')
   const [keyword, setKeyword] = useState('')
@@ -46,7 +46,7 @@ export default function SearchResults({data, rowVisible}) {
   };
 
   const renderItem =({item}) => (
-    <FlatListItem item = {item}/>
+    <FlatListItemComp item = {item}/>
   )
 
   // const searchFilterFunction = (text) => {

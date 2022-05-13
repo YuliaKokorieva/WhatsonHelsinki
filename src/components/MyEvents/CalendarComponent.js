@@ -4,7 +4,7 @@ import EventCalendar from 'react-native-events-calendar';
 
 let {width} = Dimensions.get('window');
 
-export default function CalendarView() {
+export default function CalendarComponent() {
   const [events, setEvents] = useState([
     {
       start: '2020-01-01 00:00:00',

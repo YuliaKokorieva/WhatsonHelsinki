@@ -3,7 +3,7 @@ import React,  {useState} from 'react'
 
 import {openURL, openLocation, parseDate, addSelected} from '../../utils/Functions/helpersFunctions';
 
-export default function FlatListItem({item}) {
+export default function FlatListItemComp({item}) {
 
   const [shouldShow, setShouldShow] = useState(false)
  
