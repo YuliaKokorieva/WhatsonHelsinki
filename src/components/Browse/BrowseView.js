@@ -15,16 +15,18 @@ export default function BrowseView() {
   const eventsurl=`http://open-api.myhelsinki.fi/v1/events/`
     
   useEffect(()=> firstFetchData(), [])
-  
+
   const firstFetchData = () => {
     fetch(eventsurl)
     .then(response => response.json())
     .then(data => {
       setAllevents(data.data) 
       setTags(data.tags)
-      
     },
     // setRowvisible(true)
+    )
+    .then(
+      console.log(tags)
     )
     .catch(err=> Alert.alert('Error', "Something went wrong") )    
   }

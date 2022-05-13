@@ -67,7 +67,6 @@ export default function FiltersComp({eventsurl, setEventsToShow, tags}) {
     setFilters({...filters, language: langvalue})
   }
 
-
   return (
   
       <View>
@@ -80,7 +79,7 @@ export default function FiltersComp({eventsurl, setEventsToShow, tags}) {
                 selectedValue={filters.tag}
                 mode="dropdown"
                 onValueChange={updateFilterTag}>
-                {Object.values(tags).sort().map((tag)=> {
+                {["", ...Object.values(tags)].sort().map((tag)=> {
                   return (<Picker.Item label={tag} value={tag} key={tag}/>)
                 })}
               </Picker>
