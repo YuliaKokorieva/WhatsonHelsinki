@@ -1,15 +1,13 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, Button, Platform, Alert} from 'react-native';
+import {View, Button, Platform, Alert} from 'react-native';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
-
 
 export default DatePickerComponent =({uievent, setUievent}) => {
  
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date')
   const [show, setShow] = useState(false)
-  const [isSelected, setIsSelected] = useState(false)
   const [text, setText] = useState('empty')
 
   const onChange = (event, selectedDate) => {
@@ -28,13 +26,12 @@ export default DatePickerComponent =({uievent, setUievent}) => {
 
   return (
     <View>
-      {/* <Text>{text}</Text> */}
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <View style={{ margin: 5 }}>
           <Button title='DatePicker' onPress={() => showMode('date')} />
         </View>
         <View style={{ margin: 5 }}>
-          <Button title='TimePicker' onPress={() => { showMode('time'), setIsSelected(true) }} />
+          <Button title='TimePicker' onPress={() => { showMode('time')}} />
         </View>
 
         {show && (
