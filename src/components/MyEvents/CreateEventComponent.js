@@ -15,24 +15,24 @@ export default function CreateEventComponent() {
     url: ""
   })
 
-  const [event, setEvent] = useState({
-    id: "",
-    title: "",
-    description: "",
-    start: "",
-    end: "",
-    location: "",
-    address: "",
-    url: ""
-  })
+  // const [event, setEvent] = useState({
+  //   id: "",
+  //   title: "",
+  //   description: "",
+  //   start: "",
+  //   end: "",
+  //   location: "",
+  //   address: "",
+  //   url: ""
+  // })
 
   const calculateEnd = (uievent) => {
     let end = new Date((Date.parse(uievent.start)+ uievent.duration*60*1000)).toISOString()
     return end;
   }
 
-  const transformEvent = (uievent) => {
-    setEvent({
+  const transformEvent = () => {
+    return ({
       id: "",
       title: uievent.title,
       description: uievent.description,
@@ -45,19 +45,10 @@ export default function CreateEventComponent() {
   }
 
   const saveEvent =  () => {
-    transformEvent(uievent)
-
+    let event = transformEvent(uievent)
+    console.log(event.start)
     firebaseSaveEvent(event)
-    setEvent({
-      id: "",
-      title: "",
-      description: "",
-      start: "",
-      end: "",
-      location: "",
-      address: "",
-      url: ""
-    })
+
     setUievent({
       title: "",
       description: "",
@@ -90,6 +81,7 @@ export default function CreateEventComponent() {
       <View style={styles.view_row}>
         <Text>Start: </Text>
         <DatePickerComponent uievent = {uievent} setUievent = {setUievent} />
+
       </View>
       <View style={styles.view_row}>
         <Text>Duration (mins): </Text>
