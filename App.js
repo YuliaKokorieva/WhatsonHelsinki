@@ -4,6 +4,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MyEventsView from './src/components/MyEvents/MyEventsView.js';
 import BrowseView from './src/components/Browse/BrowseView.js';
+// import "react-datepicker/dist/react-datepicker.css"
 
 
 const Tab = createMaterialTopTabNavigator();

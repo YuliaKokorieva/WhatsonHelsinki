@@ -3,14 +3,24 @@ import { getDatabase , push, ref, onValue } from 'firebase/database';
 import { initializeApp } from "firebase/app";
 import React, {useEffect, useState} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
+import DatePicker from "react-datepicker";
+
 import {firebaseApp} from '../../utils/firebaseconfig.js';
 import firebaseSaveEvent from '../../utils/Functions/firebaseSaveEvent.js';
+import DatePickerComponent from './DatePickerComponent.js';
 
 export default function CreateEventComponent() {
 
   const database = getDatabase(firebaseApp);
 
-  const [duration, setDuration] = useState('')
+  const [uievent, setUievent] = useState({
+    title: "",
+    description: "",
+    start: "",
+    address: "",
+    duration: "",
+    url: ""
+  })
 
   const [event, setEvent] = useState({
     id: "",
@@ -22,12 +32,25 @@ export default function CreateEventComponent() {
     address: "",
     url: ""
   })
-
   const parseDuration = (start, duration) => {
     
   }
 
+  const transformEvent = (uievent) => {
+    setEvent({
+      id: "",
+      title: uievent.title,
+      description: uievent.description,
+      start: "",
+      end: "",
+      location: "",
+      address: uievent.address,
+      url: uievent.url
+    })
+  }
+
   const saveEvent = () => {
+    transformEvent(uievent)
     firebaseSaveEvent(event)
     setEvent({
       id: "",
@@ -39,6 +62,14 @@ export default function CreateEventComponent() {
       address: "",
       url: ""
     })
+    setUievent({
+      title: "",
+      description: "",
+      start: "",
+      address: "",
+      duration: "",
+      url: ""
+    })
   }
   
   return (
@@ -47,48 +78,49 @@ export default function CreateEventComponent() {
       <View style={styles.view_row}>
         <Text>Title: </Text>
         <TextInput 
-          value = {event.title}
-          onChangeText={(title) => setEvent({...event, title: title})}
+          value = {uievent.title}
+          onChangeText={(title) => setUievent({...uievent, title: title})}
           style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
         />
       </View>
       <View style={styles.view_row}>
         <Text>Description: </Text>
         <TextInput 
-          value = {event.description}
-          onChangeText={(description) => setEvent({...event, description: description})}
+          value = {uievent.description}
+          onChangeText={(description) => setUievent({...uievent, description: description})}
           style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
         />
       </View>
       <View style={styles.view_row}>
         <Text>Start: </Text>
-        <TextInput 
-          value = {event.start}
-          onChangeText={(start) => setEvent({...event, start: start})}
+        <DatePickerComponent />
+        {/* <TextInput 
+          value = {uievent.start}
+          onChangeText={(start) => setUievent({...uievent, start: start})}
           style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
-        />
+        /> */}
       </View>
       <View style={styles.view_row}>
         <Text>Duration (mins): </Text>
         <TextInput 
-          value = {duration}
-          onChangeText={(duration) => setDuration(duration)}
+          value = {uievent.duration}
+          onChangeText={(duration) => setUievent({...uievent, start: duration})}
           style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
         />
       </View>
       <View style={styles.view_row}>
         <Text>Address: </Text>
         <TextInput 
-          value = {event.address}
-          onChangeText={(address) => setEvent({...event, address: address})}
+          value = {uievent.address}
+          onChangeText={(address) => setUievent({...uievent, address: address})}
           style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
         />
       </View>
       <View style={styles.view_row}>
         <Text>URL: </Text>
         <TextInput 
-          value = {event.url}
-          onChangeText={(url) => setEvent({...event, url: url})}
+          value = {uievent.url}
+          onChangeText={(url) => setUievent({...uievent, url: url})}
           style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
         />
       </View>
