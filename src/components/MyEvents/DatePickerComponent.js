@@ -4,7 +4,7 @@ import {StyleSheet, View, Text, Button, Platform} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 
-export default DatePickerComponent =() => {
+export default DatePickerComponent =({uievent, setUievent}) => {
  
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date')
@@ -15,7 +15,9 @@ export default DatePickerComponent =() => {
     const currentDate = selectedDate || date
     setShow(Platform.OS === 'ios')
     setDate(currentDate)
-    console.log(date)
+    setUievent({...uievent, start: currentDate})
+    console.log(uievent)
+
   }
   
   const showMode = (currentMode) => {

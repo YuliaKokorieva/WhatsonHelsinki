@@ -47,10 +47,12 @@ export default function CreateEventComponent() {
       address: uievent.address,
       url: uievent.url
     })
+    console.log(`event : ${event}`)
   }
 
   const saveEvent = () => {
     transformEvent(uievent)
+
     firebaseSaveEvent(event)
     setEvent({
       id: "",
@@ -93,12 +95,7 @@ export default function CreateEventComponent() {
       </View>
       <View style={styles.view_row}>
         <Text>Start: </Text>
-        <DatePickerComponent />
-        {/* <TextInput 
-          value = {uievent.start}
-          onChangeText={(start) => setUievent({...uievent, start: start})}
-          style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
-        /> */}
+        <DatePickerComponent uievent = {uievent} setUievent = {setUievent} />
       </View>
       <View style={styles.view_row}>
         <Text>Duration (mins): </Text>
