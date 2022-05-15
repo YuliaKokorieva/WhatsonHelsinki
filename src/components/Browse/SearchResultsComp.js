@@ -21,7 +21,7 @@ export default function SearchResultsComp({data, rowVisible}) {
   });
 
   const sortlist = () => {
-    console.log(data.length)
+    // console.log(data.length)
 
     // if (sortby =="title") {
     //   setDatatoshow(

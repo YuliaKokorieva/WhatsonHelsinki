@@ -25,9 +25,6 @@ export default function BrowseView() {
     },
     // setRowvisible(true)
     )
-    .then(
-      console.log(tags)
-    )
     .catch(err=> Alert.alert('Error', "Something went wrong") )    
   }
 

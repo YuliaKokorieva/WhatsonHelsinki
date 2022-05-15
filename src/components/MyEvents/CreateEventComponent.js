@@ -14,31 +14,46 @@ export default function CreateEventComponent() {
     duration: "",
     url: ""
   })
-
-  // const [event, setEvent] = useState({
-  //   id: "",
-  //   title: "",
-  //   description: "",
-  //   start: "",
-  //   end: "",
-  //   location: "",
-  //   address: "",
-  //   url: ""
-  // })
+  const [location, setLocation] = useState({})
 
   const calculateEnd = (uievent) => {
     let end = new Date((Date.parse(uievent.start)+ uievent.duration*60*1000)).toISOString()
     return end;
   }
 
+  function getLocation(address) {
+
+
+    const access_key_mapquest='IB180O9hQIKzNnLGzCxHGsQGeOUALLyt'
+  
+    fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=${access_key_mapquest}`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ "location": address })
+    })
+      .then(response => response.json())
+      .then(data => {
+        setLocation({
+          lat: data['results'][0].locations[0].latLng.lat,
+          lon: data['results'][0].locations[0].latLng.lng
+        })
+      }
+      )
+      .catch(err => console.error(err))
+    return location
+  }
+
   const transformEvent = () => {
+    let loc=getLocation(uievent.address)
     return ({
       id: "",
       title: uievent.title,
       description: uievent.description,
       start: uievent.start,
       end: calculateEnd(uievent),
-      location: "",
+      location: {lat: loc.lat, lon: loc.lon},
       address: uievent.address,
       url: uievent.url
     })
@@ -46,17 +61,16 @@ export default function CreateEventComponent() {
 
   const saveEvent =  () => {
     let event = transformEvent(uievent)
-    console.log(event.start)
     firebaseSaveEvent(event)
 
-    setUievent({
-      title: "",
-      description: "",
-      start: "",
-      address: "",
-      duration: "",
-      url: ""
-    })
+    // setUievent({
+    //   title: "",
+    //   description: "",
+    //   start: "",
+    //   address: "",
+    //   duration: "",
+    //   url: ""
+    // })
   }
   
   return (

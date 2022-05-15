@@ -7,8 +7,6 @@ import AgendaComponent from './AgendaComponent.js';
 
 export default function MyEventsView() {
 
-
-
   return (
     <View style={{flex:1}}>
       {/* <CalendarViewAgenda/> */}
