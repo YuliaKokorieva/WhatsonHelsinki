@@ -4,6 +4,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import {Picker} from '@react-native-picker/picker';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import * as Location from 'expo-location';
+import { Card } from 'react-native-elements';
 
 import { globalStyles } from '../../styles/globalStyles';
 
@@ -71,7 +72,7 @@ export default function FiltersComp({eventsurl, setEventsToShow, tags}) {
   }
 
   return (
-    <View style={{flex:1}}>
+    <View style={globalStyles.welcomeCard}>
       <Grid>
         <Col size={2}>
           <Row style={globalStyles.rowStyle}>

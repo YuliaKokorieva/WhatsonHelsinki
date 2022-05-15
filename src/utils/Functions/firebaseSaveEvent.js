@@ -1,5 +1,5 @@
 import { getDatabase , push, ref } from 'firebase/database';
-import firebaseApp from '../firebaseconfig.js';
+import firebaseApp from '../FirebaseConfig/firebaseconfig.js';
 
 export default function firebaseSaveEvent(event) {
   const database = getDatabase(firebaseApp);

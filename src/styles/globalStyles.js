@@ -32,7 +32,8 @@ export const globalStyles = StyleSheet.create({
     height: 35 
   },
   header: {
-    fontSize: 20
+    fontSize: 20,
+    justifyContent: 'center'
   },
   listItemSeparator: {
     height: 1,
@@ -44,10 +45,19 @@ export const globalStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  link: {
+    color: 'blue'
+  },
+  modal: {
+    padding: 20,
+    paddingTop: 50
+  },
+  welcomeCard: {
+    margin: 5,
+    backgroundColor: 'white'
+  },
+  textSmall: {
+    fontSize: 10
   }
-  
-
-
-
-  
 })

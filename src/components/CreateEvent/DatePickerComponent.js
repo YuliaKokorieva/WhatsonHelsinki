@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import {View, Button, Platform, Alert} from 'react-native';
 
-
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { globalStyles } from '../../styles/globalStyles';
 
 export default DatePickerComponent =({uievent, setUievent}) => {

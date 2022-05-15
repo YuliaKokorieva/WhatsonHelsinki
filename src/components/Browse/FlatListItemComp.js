@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import React,  {useState} from 'react'
 
 import {openURL, openLocation, parseDate, addSelected} from '../../utils/Functions/helpersFunctions';
+import { globalStyles } from '../../styles/globalStyles';
 
 export default function FlatListItemComp({item}) {
 
@@ -20,10 +21,10 @@ export default function FlatListItemComp({item}) {
               <Text>When: {parseDate(item.event_dates.starting_day, item.event_dates.ending_day)}</Text>
               <Text>Address: {item.location.address.street_address}, {item.location.address.locality}</Text>
               <TouchableOpacity onPress={()=>openLocation(item.location.lat, item.location.lon)}>
-                <Text style={styles.link}>Open location in GoogleMaps</Text>
+                <Text style={globalStyles.link}>Open location in GoogleMaps</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={()=>openURL(item.info_url)}>
-                <Text style={styles.link}>Go to the website</Text>
+                <Text style={globalStyles.link}>Go to the website</Text>
               </TouchableOpacity>
             </View>
           ) : null
@@ -35,17 +36,3 @@ export default function FlatListItemComp({item}) {
   </TouchableOpacity>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  link: {
-    color: 'blue'
-  }
-  
-});
-  

@@ -10,7 +10,11 @@ const openURL = (url) => {
 }
 
 const openLocation = (lat, lon) => {
-  Linking.openURL(`https://maps.google.com/?q=${lat},${lon}`)
+  if (lat && lon) {
+    Linking.openURL(`https://maps.google.com/?q=${lat},${lon}`)
+  } else {
+    Alert.alert("No address available")
+  }
 }
 
 const parseDate =(start, end) => {

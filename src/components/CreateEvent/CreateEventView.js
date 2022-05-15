@@ -6,7 +6,7 @@ import firebaseSaveEvent from '../../utils/Functions/firebaseSaveEvent.js';
 import DatePickerComponent from './DatePickerComponent.js';
 import { globalStyles } from '../../styles/globalStyles.js';
 
-export default function CreateEventComponent() {
+export default function CreateEventView() {
 
   const [uievent, setUievent] = useState({
     title: "",
