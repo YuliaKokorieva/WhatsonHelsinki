@@ -2,7 +2,10 @@ import { Text, View, Button, Alert, TextInput} from 'react-native';
 import React, {useState} from 'react'
 import { useFocusEffect } from '@react-navigation/native';
 import {Picker} from '@react-native-picker/picker';
+import { Col, Row, Grid } from "react-native-easy-grid";
 import * as Location from 'expo-location';
+
+import { globalStyles } from '../../styles/globalStyles';
 
 
 export default function FiltersComp({eventsurl, setEventsToShow, tags}) {
@@ -68,50 +71,64 @@ export default function FiltersComp({eventsurl, setEventsToShow, tags}) {
   }
 
   return (
-  
-      <View>
-        <View style={{flexDirection: 'row', justifyContent: "space-around", width: '100%'}}>
-          <View style={{flexDirection: 'column', justifyContent: "space-around", marginBottom: 10, marginTop:10, width: '70%'}}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text>Find by tag:     </Text>
-              <Picker
-                style={{width: 150}}
-                selectedValue={filters.tag}
-                mode="dropdown"
-                onValueChange={updateFilterTag}>
-                {["", ...Object.values(tags)].sort().map((tag)=> {
-                  return (<Picker.Item label={tag} value={tag} key={tag}/>)
-                })}
-              </Picker>
-            </View>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text>Find nearby: </Text>
-              <TextInput
-                value={filters.radius}
-                onChangeText = {updateFilterRadius}
-                keyboardType= 'numeric'
-                style = {{width: 60, borderColor: 'grey', borderWidth: 1, marginBottom: 30}}
-              />
-            </View>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text>Find by language:     </Text>
-              <Picker
-                style={{width: 100}}
-                selectedValue={filters.language}
-                mode="dropdown"
-                onValueChange={updateFilterLang}>
-                {lang.map((item, index)=> {
-                  return (<Picker.Item label={item} value={item} key={index}/>)
-                })}
-              </Picker>
-            </View>
+    <View style={{flex:1}}>
+      <Grid>
+        <Col size={2}>
+          <Row style={globalStyles.rowStyle}>
+            <Text>Find by tag:</Text>
+          </Row>
+          <Row style={globalStyles.rowStyle}>
+            <Text>Find nearby:</Text>
+          </Row>
+          <Row style={globalStyles.rowStyle}>
+            <Text>Find by language:</Text>
+          </Row>
+        </Col>
 
-        </View>
-        <View style={{flexDirection: 'column', alignItems: 'flex-start', marginBottom: 10, marginTop:10, width: '30%'}}>
-          <Button title="find" onPress = {findByFilters}/>
-          <Button title="clear" onPress = {()=>setFilters({tag:'', radius: '', language: ''})}/>
-        </View>
-      </View>
-      </View>
+        <Col size={3}>
+          <Row style={globalStyles.rowStyle}>
+            <Picker
+              style={globalStyles.picker}
+              selectedValue={filters.tag}
+              mode="dropdown"
+              onValueChange={updateFilterTag}>
+              {["", ...Object.values(tags)].sort().map((tag) => {
+                return (<Picker.Item label={tag} value={tag} key={tag} />)
+              })}
+            </Picker>
+          </Row>
+          <Row style={globalStyles.rowStyle}>
+            <TextInput
+              value={filters.radius}
+              onChangeText={updateFilterRadius}
+              keyboardType='numeric'
+              style={globalStyles.textField}
+            />
+            <Text>(radius, km)</Text>
+            
+          </Row>
+          <Row style={globalStyles.rowStyle}>
+            <Picker
+              style={globalStyles.picker}
+              selectedValue={filters.language}
+              mode="dropdown"
+              onValueChange={updateFilterLang}>
+              {lang.map((item, index) => {
+                return (<Picker.Item label={item} value={item} key={index} />)
+              })}
+            </Picker>
+          </Row>
+        </Col>  
+
+        <Col size={1}>
+          <Row style={globalStyles.rowStyle}>
+            <Button title="find" onPress = {findByFilters}/>
+          </Row>
+          <Row style={globalStyles.rowStyle}>
+            <Button color="darkred" title="clear" onPress = {()=>setFilters({tag:'', radius: '', language: ''})}/>
+          </Row>
+        </Col>
+      </Grid>
+    </View>
   )
 }

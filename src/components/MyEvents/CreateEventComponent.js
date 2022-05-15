@@ -73,21 +73,6 @@ export default function CreateEventComponent() {
     })
   }
   
-<Grid>
-    <Col>
-        <Text>1</Text>
-    </Col>
-    <Col>
-        <Row>
-            <Text>2</Text>
-        </Row>
-        <Row>
-            <Text>3</Text>
-        </Row>
-    </Col>
-</Grid>
-
-
   return (
     <View style={{flex:1}}>
       <Text>Create event</Text>
