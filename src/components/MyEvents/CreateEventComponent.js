@@ -75,77 +75,59 @@ export default function CreateEventComponent() {
   
   return (
     <View style={{flex:1}}>
-      <Text>Create event</Text>
+      <Text style={globalStyles.header}>Create event</Text>
       <Grid>
-        <Row>
-          <Col>
-            <Text>Title: </Text>
-          </Col>
-          <Col>
+        <Col size={1}>
+          <Row><Text>Title: </Text></Row>
+          <Row><Text>Description: </Text></Row>
+          <Row><Text>Start: </Text></Row>
+          <Row><Text>Duration (mins): </Text></Row>
+          <Row><Text>Address: </Text></Row>
+          <Row><Text>URL: </Text></Row>    
+        </Col>
+        <Col size={2}>
+          <Row>
             <TextInput 
-            value = {uievent.title}
-            onChangeText={(title) => setUievent({...uievent, title: title})}
-            style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
-          />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Text>Description: </Text>
-          </Col>
-          <Col>
+              value = {uievent.title}
+              onChangeText={(title) => setUievent({...uievent, title: title})}
+              style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
+            />
+          </Row>
+          <Row>
             <TextInput 
-            value = {uievent.description}
-            onChangeText={(description) => setUievent({...uievent, description: description})}
-            style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
-          />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Text>Start: </Text>
-          </Col>
+              value = {uievent.description}
+              onChangeText={(description) => setUievent({...uievent, description: description})}
+              style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
+            />
+          </Row>
+          <Row>
             <DatePickerComponent uievent = {uievent} setUievent = {setUievent} />
-          <Col>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Text>Duration (mins): </Text>
-          </Col>
-          <Col>
+          </Row>
+          <Row>
             <TextInput 
-            value = {uievent.duration}
-            keyboardType='numeric'
-            onChangeText={(duration) => setUievent({...uievent, duration: duration})}
-            style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
-        />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Text>Address: </Text>
-          </Col>
-          <Col>
+              value = {uievent.duration}
+              keyboardType='numeric'
+              onChangeText={(duration) => setUievent({...uievent, duration: duration})}
+              style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
+            />
+          </Row>
+          <Row>
             <TextInput 
-            value = {uievent.address}
-            onChangeText={(address) => setUievent({...uievent, address: address})}
-            style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
-          />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Text>URL: </Text>
-          </Col>
-          <Col>
+              value = {uievent.address}
+              onChangeText={(address) => setUievent({...uievent, address: address})}
+              style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
+            />
+          </Row>
+          <Row>           
             <TextInput 
-            value = {uievent.url}
-            onChangeText={(url) => setUievent({...uievent, url: url})}
-            style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
-          />
+              value = {uievent.url}
+              onChangeText={(url) => setUievent({...uievent, url: url})}
+              style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
+            />
+          </Row>
+         
           </Col>
-        </Row>
+
       </Grid>
       <View style={globalStyles.buttonView}>
         <Button 

@@ -22,7 +22,11 @@ export const globalStyles = StyleSheet.create({
     width: 150,
     backgroundColor: 'white',
     height: 35 
+  },
+  header: {
+    fontSize: 20
   }
+
 
   
 })
