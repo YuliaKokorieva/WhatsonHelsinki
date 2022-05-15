@@ -70,8 +70,8 @@ export default function FiltersComp({eventsurl, setEventsToShow, tags}) {
   return (
   
       <View>
-        <View style={{flexDirection: 'row', alignItems: 'center', width: '100%'}}>
-          <View style={{flexDirection: 'column', alignItems: 'flex-start', marginBottom: 10, marginTop:10, width: '70%'}}>
+        <View style={{flexDirection: 'row', justifyContent: "space-around", width: '100%'}}>
+          <View style={{flexDirection: 'column', justifyContent: "space-around", marginBottom: 10, marginTop:10, width: '70%'}}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Text>Find by tag:     </Text>
               <Picker

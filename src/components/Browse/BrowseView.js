@@ -2,6 +2,7 @@ import { Text, View, Button, Alert} from 'react-native';
 import React, {useState, useEffect} from 'react'
 import SearchResultsComp from './SearchResultsComp';
 import FiltersComp from './FiltersComp';
+import { globalStyles } from '../../styles/globalStyles';
 
 export default function BrowseView() {
 
@@ -35,7 +36,7 @@ export default function BrowseView() {
   return (
     <View style={{height: '100%'}}>
       <View style={{height: '30%'}}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={globalStyles.buttonView}>
           <Button 
             title="Show all"
             onPress={showAll}
