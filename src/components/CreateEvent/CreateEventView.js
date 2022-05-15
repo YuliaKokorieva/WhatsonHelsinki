@@ -1,7 +1,6 @@
-import { Text, View, TextInput, Button } from 'react-native';
+import { Text, View, TextInput, Button, Alert } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import { Col, Row, Grid } from "react-native-easy-grid";
-import { Card } from 'react-native-elements';
 
 import firebaseSaveEvent from '../../utils/Functions/firebaseSaveEvent.js';
 import DatePickerComponent from './DatePickerComponent.js';
@@ -64,6 +63,7 @@ export default function CreateEventView() {
   const saveEvent =  () => {
     let event = transformEvent(uievent)
     firebaseSaveEvent(event)
+    Alert.alert(`Event ${event.title} created`)
 
     setUievent({
       title: "",

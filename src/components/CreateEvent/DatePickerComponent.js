@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, Button, Platform, Alert} from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { globalStyles } from '../../styles/globalStyles';
 
@@ -16,7 +17,6 @@ export default DatePickerComponent =({uievent, setUievent}) => {
     setUievent({...uievent, start: currentDate.toISOString()})
 
     setText(`Date: ${currentDate.toISOString().slice(0,10)}, time: ${currentDate.toLocaleTimeString().slice(0,6)}`)
-    Alert.alert(text)
   }
   
   const showMode = (currentMode) => {
