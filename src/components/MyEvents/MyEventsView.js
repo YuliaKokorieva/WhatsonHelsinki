@@ -9,7 +9,7 @@ export default function MyEventsView() {
 
   return (
     <View style={{flex:1}}>
-      {/* <CalendarViewAgenda/> */}
+      <AgendaComponent/>
       <CreateEventComponent />
 
 

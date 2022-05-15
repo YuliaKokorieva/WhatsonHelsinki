@@ -2,14 +2,14 @@ import React, {useState, useEffect} from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import {Agenda} from 'react-native-calendars';
 import { TouchableOpacity } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { Card } from 'react-native-elements';
-import getEventsFromFirebaseFunc from '../../utils/Functions/firebaseGetAllEvents';
+import firebaseGetAllEvents from '../../utils/Functions/firebaseGetAllEvents';
 
 export default function AgendaComponent() {
   
-  const [eventsToShow, setEventsToShow] = useState({})
 
-  const [items, setItems] = useState({
+  const [eventsToShow, setEventsToShow] = useState({
     '2022-05-25': [{
       title: 'Puuhakeskiviikko', 
       description: 'Puuhakeskiviikko koululaisille', 
@@ -30,33 +30,27 @@ export default function AgendaComponent() {
         lat: '60.21747970581055', 
         lon: '24.809919357299805'}}],
        })
-  // const [items, setItems] = useState({})
-
-  const timeToString = (time) => {
-    const date = new Date(time);
-    return date.toISOString().split('T')[0];
-  };
 
   useEffect(()=> {
-
+    console.log('getting data')
     getData()
   },[])
 
   const getData = () => {
-    let rawEvents = getEventsFromFirebaseFunc()
-    console.log(rawEvents)
-    const reducedEvents = rawEvents.reduce((acc, currentEvent) => {
-      const {start, ...item} = currentEvent
-      acc[start.split('T')[0]]=[item]
-      return acc
-    }, {},
-    )
-    setEventsToShow(reducedEvents)
-    console.log(eventsToShow)
+    let rawEvents = Object.values(firebaseGetAllEvents())
+
+    let events = {}
+    for (let i=0; i<rawEvents.length; i++) {
+      let strTime = rawEvents[i].start.split('T')[0]
+      if (!events[strTime]) {
+        events[strTime] = []
+      }
+      events[strTime].push(rawEvents[i])
+    }
+    setEventsToShow(events)
   }
   
   const renderItem = (item) => {
-
     return (
       <View >
         <TouchableOpacity>
@@ -66,47 +60,18 @@ export default function AgendaComponent() {
               justifyContent: 'space-between',
               alignItems: 'center',
               }}>
-              <Text>{title.name}</Text>
+              <Text>{item.title}</Text>
             </View>
           </Card>
          </TouchableOpacity>
-
       </View>
     )
-
   }
-
-  const loadItems = (day) => {
-    setTimeout(() => {
-      for (let i = -15; i < 85; i++) {
-        const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-        const strTime = timeToString(time);
-        if (!items[strTime]) {
-          items[strTime] = [];
-          const numItems = Math.floor(Math.random() * 3 + 1);
-          for (let j = 0; j < numItems; j++) {
-            items[strTime].push({
-              name: 'Item for ' + strTime + ' #' + j,
-              height: Math.max(50, Math.floor(Math.random() * 150)),
-            });
-          }
-        }
-      }
-      const newItems = {};
-      Object.keys(items).forEach((key) => {
-        newItems[key] = items[key];
-      });
-      setItems(newItems);
-    }, 1000);
-  };
- 
 
   return (
     <View style={{flex: 1}}>
       <Agenda
-        items={items}
-        loadItemsForMonth={loadItems}
-        selected={ '2022-05-09'}
+        items={eventsToShow}
         renderItem={renderItem}
       />
     </View>

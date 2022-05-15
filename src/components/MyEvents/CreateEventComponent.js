@@ -22,8 +22,6 @@ export default function CreateEventComponent() {
   }
 
   function getLocation(address) {
-
-
     const access_key_mapquest='IB180O9hQIKzNnLGzCxHGsQGeOUALLyt'
   
     fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=${access_key_mapquest}`, {
@@ -63,14 +61,14 @@ export default function CreateEventComponent() {
     let event = transformEvent(uievent)
     firebaseSaveEvent(event)
 
-    // setUievent({
-    //   title: "",
-    //   description: "",
-    //   start: "",
-    //   address: "",
-    //   duration: "",
-    //   url: ""
-    // })
+    setUievent({
+      title: "",
+      description: "",
+      start: "",
+      address: "",
+      duration: "",
+      url: ""
+    })
   }
   
   return (
