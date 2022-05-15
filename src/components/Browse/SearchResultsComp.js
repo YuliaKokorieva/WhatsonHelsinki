@@ -4,6 +4,7 @@ import React, {useState} from 'react'
 import {Picker} from '@react-native-picker/picker';
 import { useFocusEffect } from '@react-navigation/native'
 import FlatListItemComp from './FlatListItemComp.js';
+import { globalStyles } from '../../styles/globalStyles.js';
 
 export default function SearchResultsComp({data, rowVisible}) {
 
@@ -36,11 +37,7 @@ export default function SearchResultsComp({data, rowVisible}) {
   const listSeparator = () => {
     return (
       <View        
-        style={{
-          height: 1,
-          width: "80%",
-          backgroundColor: "#CED0CE",
-          marginLeft: "10%"}}
+        style={globalStyles.listItemSeparator}
       />
     );
   };

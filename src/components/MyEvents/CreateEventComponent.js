@@ -1,4 +1,4 @@
-import { Text, View, TextInput, Button, StyleSheet } from 'react-native';
+import { Text, View, TextInput, Button } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
@@ -77,57 +77,55 @@ export default function CreateEventComponent() {
     <View style={{flex:1}}>
       <Text style={globalStyles.header}>Create event</Text>
       <Grid>
-        <Col size={1}>
-          <Row><Text>Title: </Text></Row>
-          <Row><Text>Description: </Text></Row>
-          <Row><Text>Start: </Text></Row>
-          <Row><Text>Duration (mins): </Text></Row>
-          <Row><Text>Address: </Text></Row>
-          <Row><Text>URL: </Text></Row>    
+        <Col size={2} >
+          <Row style={globalStyles.rowStyle}><Text>Title: </Text></Row>
+          <Row style={globalStyles.rowStyle}><Text>Description: </Text></Row>
+          <Row style={globalStyles.rowStyle}><Text>Start: </Text></Row>
+          <Row style={globalStyles.rowStyle}><Text>Duration (mins): </Text></Row>
+          <Row style={globalStyles.rowStyle}><Text>Address: </Text></Row>
+          <Row style={globalStyles.rowStyle}><Text>URL: </Text></Row>    
         </Col>
-        <Col size={2}>
-          <Row>
+        <Col size={4}>
+          <Row style={globalStyles.rowStyle}>
             <TextInput 
               value = {uievent.title}
               onChangeText={(title) => setUievent({...uievent, title: title})}
-              style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
+              style = {globalStyles.textFieldWide}
             />
           </Row>
-          <Row>
+          <Row style={globalStyles.rowStyle}>
             <TextInput 
               value = {uievent.description}
               onChangeText={(description) => setUievent({...uievent, description: description})}
-              style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
+              style = {globalStyles.textFieldWide}
             />
           </Row>
-          <Row>
+          <Row style={globalStyles.rowStyle}>
             <DatePickerComponent uievent = {uievent} setUievent = {setUievent} />
           </Row>
-          <Row>
+          <Row style={globalStyles.rowStyle}>
             <TextInput 
               value = {uievent.duration}
               keyboardType='numeric'
               onChangeText={(duration) => setUievent({...uievent, duration: duration})}
-              style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
+              style = {globalStyles.textFieldWide}
             />
           </Row>
-          <Row>
+          <Row style={globalStyles.rowStyle}>
             <TextInput 
               value = {uievent.address}
               onChangeText={(address) => setUievent({...uievent, address: address})}
-              style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
+              style = {globalStyles.textFieldWide}
             />
           </Row>
-          <Row>           
+          <Row style={globalStyles.rowStyle}>           
             <TextInput 
               value = {uievent.url}
               onChangeText={(url) => setUievent({...uievent, url: url})}
-              style = {{width: 200, borderColor: 'grey', borderWidth: 1}}
+              style = {globalStyles.textFieldWide}
             />
-          </Row>
-         
-          </Col>
-
+          </Row> 
+        </Col>
       </Grid>
       <View style={globalStyles.buttonView}>
         <Button 

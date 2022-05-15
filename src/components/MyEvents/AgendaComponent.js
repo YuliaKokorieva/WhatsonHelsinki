@@ -5,6 +5,7 @@ import { TouchableOpacity } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { Card } from 'react-native-elements';
 import firebaseGetAllEvents from '../../utils/Functions/firebaseGetAllEvents';
+import { globalStyles } from '../../styles/globalStyles';
 
 export default function AgendaComponent() {
   
@@ -55,11 +56,7 @@ export default function AgendaComponent() {
       <View >
         <TouchableOpacity>
           <Card>
-            <View style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              }}>
+            <View style={globalStyles.agendaCard}>
               <Text>{item.title}</Text>
             </View>
           </Card>
@@ -77,11 +74,3 @@ export default function AgendaComponent() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

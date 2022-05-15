@@ -120,7 +120,7 @@ export default function FiltersComp({eventsurl, setEventsToShow, tags}) {
           </Row>
         </Col>  
 
-        <Col size={1}>
+        <Col size={1.5}>
           <Row style={globalStyles.rowStyle}>
             <Button title="find" onPress = {findByFilters}/>
           </Row>
