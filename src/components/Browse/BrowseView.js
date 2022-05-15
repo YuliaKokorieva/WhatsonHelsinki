@@ -16,7 +16,7 @@ export default function BrowseView() {
   const [filtersvisible, setFiltersvisible] = useState(false)
 
 
-  const eventsurl='http://open-api.myhelsinki.fi/v1/events/'
+  const eventsurl=API_URL
     
   useEffect(()=> firstFetchData(), [])
 
