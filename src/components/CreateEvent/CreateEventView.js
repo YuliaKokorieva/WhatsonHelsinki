@@ -1,10 +1,12 @@
 import { Text, View, TextInput, Button } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import { Col, Row, Grid } from "react-native-easy-grid";
+import { Card } from 'react-native-elements';
 
 import firebaseSaveEvent from '../../utils/Functions/firebaseSaveEvent.js';
 import DatePickerComponent from './DatePickerComponent.js';
 import { globalStyles } from '../../styles/globalStyles.js';
+import {ACCESS_KEY_MAPQUEST} from '@env'
 
 export default function CreateEventView() {
 
@@ -24,7 +26,7 @@ export default function CreateEventView() {
   }
 
   function getLocation(address) {
-    const access_key_mapquest='IB180O9hQIKzNnLGzCxHGsQGeOUALLyt'
+    const access_key_mapquest=ACCESS_KEY_MAPQUEST
   
     fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=${access_key_mapquest}`, {
       method: "POST",
@@ -74,6 +76,7 @@ export default function CreateEventView() {
   }
   
   return (
+        
     <View style={{flex:1}}>
       <Text style={globalStyles.header}>Create event</Text>
       <Grid>

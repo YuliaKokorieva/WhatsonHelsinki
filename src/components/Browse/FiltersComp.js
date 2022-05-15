@@ -4,7 +4,6 @@ import { useFocusEffect } from '@react-navigation/native';
 import {Picker} from '@react-native-picker/picker';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import * as Location from 'expo-location';
-import { Card } from 'react-native-elements';
 
 import { globalStyles } from '../../styles/globalStyles';
 
