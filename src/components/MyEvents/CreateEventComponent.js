@@ -48,7 +48,7 @@ export default function CreateEventComponent() {
   const transformEvent = () => {
     let loc=getLocation(uievent.address)
     return ({
-      id: "",
+      id: Date.now(),
       title: uievent.title,
       description: uievent.description,
       start: uievent.start,
