@@ -1,12 +1,11 @@
 import {API_URL} from '@env'
-import { Text, View, Button, Alert} from 'react-native';
+import { View, Button, Alert} from 'react-native';
 import React, {useState, useEffect} from 'react'
 
 import SearchResultsComp from './SearchResultsComp';
 import FiltersComp from './FiltersComp';
 import SortingComp from './SortingComp';
 import { globalStyles } from '../../styles/globalStyles';
-
 
 export default function BrowseView() {
 
@@ -35,33 +34,6 @@ export default function BrowseView() {
     .catch(err=> Alert.alert('Error', "Data could not be fetched") )    
   }
 
-  const handleShowSorting = () => {
-    if (!filtersvisible && !sortingvisible) {
-      setSortingvisible(true)
-    }
-    if (filtersvisible && !sortingvisible) {
-      setFiltersvisible(false)
-      setSortingvisible(true)
-    }
-    if (sortingvisible) {
-      setSortingvisible(false)
-    }
-
-  }
-
-  const handleShowFilters=() => {
-    if (!filtersvisible && !sortingvisible) {
-      setFiltersvisible(true)
-    }
-    if (!filtersvisible && sortingvisible) {
-      setFiltersvisible(true)
-      setSortingvisible(false)
-    }
-    if (filtersvisible) {
-      setFiltersvisible(false)
-    }
-  }
-
   return (
     <View style={{flex:1}}>
       <View >
@@ -85,19 +57,22 @@ export default function BrowseView() {
         </View>
           
         <View>
-          {/* https://www.raywenderlich.com/718-6-best-practices-for-mobile-app-search-filtering */}
           {filtersvisible 
-          ? <FiltersComp
+          ? 
+            <FiltersComp
               eventsurl={eventsurl}
               setEventsToShow={setEventsToShow}
               tags={tags}
+              allevents={allevents}
             />
           : null
           }
           {sortingvisible
-          ? <SortingComp
-              eventsToShow = {eventsToShow}
+          ? 
+            <SortingComp
+              eventsToShow={eventsToShow}
               setEventsToShow={setEventsToShow}
+              allevents={allevents}
             />
           :null
         }

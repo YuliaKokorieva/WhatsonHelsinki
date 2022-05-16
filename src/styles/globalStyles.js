@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 
-
 export const globalStyles = StyleSheet.create({
   buttonView: {
     flexDirection: "row",
@@ -14,6 +13,13 @@ export const globalStyles = StyleSheet.create({
   },
   textField: {
     width: 60, 
+    borderColor: 'black', 
+    borderWidth: 1, 
+    margin: 5,
+    backgroundColor: 'white'
+  },
+  textField100: {
+    width: 100, 
     borderColor: 'black', 
     borderWidth: 1, 
     margin: 5,
@@ -64,5 +70,17 @@ export const globalStyles = StyleSheet.create({
     flexDirection: 'row', 
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  lineContainerLeft : {
+    flexDirection: 'row', 
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  flatlistContainer : {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+
   }
 })

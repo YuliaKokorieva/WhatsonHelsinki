@@ -19,7 +19,6 @@ export default function MyEventsView() {
 
       </View>
       }
-
       <AgendaComponent/>
     </View>
   )

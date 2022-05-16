@@ -15,25 +15,17 @@ const selectCurrentWeek = (eventsArray) => {
   })
   return selectedEvents
 }
-export {selectCurrentWeek}
 
- const searchFilterFunction = (text) => {
-    if (text) {
 
-      const newData = masterData.filter(function (item) {
-        console.log(item.name)
-        const itemData = item.name.fi
-          ? item.name.fi.toUpperCase()
-          : ''.toUpperCase();
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      });
-      setFilteredData(newData);
-      setKeyword(text);
-    } else {
+const keywordSearch = (eventsArray, keyword) => {
+  if (keyword) {
+    const filteredEvents = eventsArray.filter(function(item) {
+      return item.name.fi.toLowerCase().includes(keyword.toLowerCase())
+    })
+    return filteredEvents
+  } else {
+    return eventsArray
+  }
+};
 
-      setFilteredData(data);
-      console.log(filteredData)
-      setKeyword(text);
-    }
-  };
+export {selectCurrentWeek, keywordSearch}

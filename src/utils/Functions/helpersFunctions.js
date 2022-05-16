@@ -17,15 +17,23 @@ const openLocation = (lat, lon) => {
   }
 }
 
-const parseDate =(start, end) => {
-  let start_date=(new Date(start)).toString().slice(0,16)
-  let end_date=(new Date(end)).toString().slice(0,16)
-  let start_time=(new Date(start)).toString().slice(16,21)
-  let end_time=(new Date(end)).toString().slice(16, 21)
-  if (start_date=== end_date) {
-    return (`${start_date}, ${start_time}-${end_time}`)
-  } else{
-    return (`${start_date} - ${end_date}, ${start_time}-${end_time}`)
+const parseDate = (start, end) => {
+  if (start) {
+    let start_date=(new Date(start)).toString().slice(0,16)
+    let start_time=(new Date(start)).toString().slice(16,21)
+    if (end) {
+      let end_date=(new Date(end)).toString().slice(0,16)
+      let end_time=(new Date(end)).toString().slice(16, 21)
+      if (start_date=== end_date) {
+        return (`${start_date}, ${start_time}-${end_time}`)
+      } else{
+        return (`${start_date} - ${end_date}, ${start_time}-${end_time}`)
+      }
+    } else {
+      return (`${start_date}, at ${start_time}`)
+    }
+  } else {
+    return null
   }
 }
 

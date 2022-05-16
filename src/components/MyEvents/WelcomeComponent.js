@@ -18,7 +18,6 @@ export default function WelcomeComponent() {
           </Text>
         </View>
       </Card>
-
     </View>
   )
     

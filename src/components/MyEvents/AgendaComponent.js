@@ -12,7 +12,8 @@ export default function AgendaComponent() {
   
   const [cardOpen, setCardOpen] = useState(false)
   const [modalData, setModalData] = useState({})
-  // const [eventsToShow, setEventsToShow] = useState({
+
+  //sample data in case fetching doesn't work
   let events = {
     '2022-05-25': [{
       title: 'Puuhakeskiviikko', 
@@ -43,9 +44,6 @@ export default function AgendaComponent() {
 
   const getData = () => {
     let rawEvents = Object.values(firebaseGetAllEvents())
-
-
-   
     for (let i=0; i<rawEvents.length; i++) {
       let strTime = rawEvents[i].start.split('T')[0]
       if (!events[strTime]) {
@@ -53,7 +51,6 @@ export default function AgendaComponent() {
       }
       events[strTime].push(rawEvents[i])
     }
-
   }
 
   const renderItem = (item) => {

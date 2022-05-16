@@ -2,14 +2,13 @@ import { Text, View, Button, Alert, TextInput} from 'react-native';
 import React, {useState} from 'react'
 import { useFocusEffect } from '@react-navigation/native';
 import {Picker} from '@react-native-picker/picker';
-import { Col, Row, Grid } from "react-native-easy-grid";
 import * as Location from 'expo-location';
 import { Card } from 'react-native-elements';
 
 import { globalStyles } from '../../styles/globalStyles';
 
 
-export default function FiltersComp({eventsurl, setEventsToShow, tags}) {
+export default function FiltersComp({eventsurl, setEventsToShow, tags, allevents}) {
 
   const [location, setLocation] = useState(null)
   const lang = ["", "en", "fi", "sv"]
@@ -71,6 +70,12 @@ export default function FiltersComp({eventsurl, setEventsToShow, tags}) {
     setFilters({...filters, language: langvalue})
   }
 
+  const cancelSelection = () => {
+    setEventsToShow(allevents)
+    setFilters({tag:'', radius: '', language: ''})
+    Alert.alert("Back to all events")
+  }
+
   return (
     <View style={globalStyles.welcomeCard}>
     <Card>
@@ -112,7 +117,7 @@ export default function FiltersComp({eventsurl, setEventsToShow, tags}) {
             <Button title="find" onPress = {findByFilters}/>
           </View>
           <View style={globalStyles.buttonView}>
-            <Button color="darkred" title="clear" onPress = {()=>setFilters({tag:'', radius: '', language: ''})}/>
+            <Button color="darkred" title="cancel selection" onPress = {cancelSelection}/>
           </View>
         </View>
       </Card>

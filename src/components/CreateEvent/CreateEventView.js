@@ -1,5 +1,5 @@
 import { Text, View, TextInput, Button, Alert } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import firebaseSaveEvent from '../../utils/Functions/firebaseSaveEvent.js';
@@ -30,7 +30,6 @@ export default function CreateEventView() {
 
   function getLocation(address) {
     const access_key_mapquest = 'IB180O9hQIKzNnLGzCxHGsQGeOUALLyt'
-
 
     fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=${access_key_mapquest}`, {
       method: "POST",
@@ -72,7 +71,6 @@ export default function CreateEventView() {
       address: uievent.address,
       url: uievent.url
     })
-    
   }
 
   const saveEvent =  () => {
