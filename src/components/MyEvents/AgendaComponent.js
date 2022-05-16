@@ -12,7 +12,8 @@ export default function AgendaComponent() {
   
   const [cardOpen, setCardOpen] = useState(false)
   const [modalData, setModalData] = useState({})
-  const [eventsToShow, setEventsToShow] = useState({
+  // const [eventsToShow, setEventsToShow] = useState({
+  let events = {
     '2022-05-25': [{
       title: 'Puuhakeskiviikko', 
       description: 'Puuhakeskiviikko koululaisille', 
@@ -32,17 +33,19 @@ export default function AgendaComponent() {
       location: {
         lat: '60.21747970581055', 
         lon: '24.809919357299805'}}],
-       })
+       }
+      //  )
 
-  // useFocusEffect(()=> {
-  //   console.log('getting data')
-  //   getData()
-  // })
+  useEffect(()=> {
+    console.log('getting data')
+    getData()
+  },[])
 
   const getData = () => {
     let rawEvents = Object.values(firebaseGetAllEvents())
 
-    let events = {}
+
+   
     for (let i=0; i<rawEvents.length; i++) {
       let strTime = rawEvents[i].start.split('T')[0]
       if (!events[strTime]) {
@@ -50,6 +53,7 @@ export default function AgendaComponent() {
       }
       events[strTime].push(rawEvents[i])
     }
+
   }
 
   const renderItem = (item) => {
@@ -87,7 +91,7 @@ export default function AgendaComponent() {
         <Text style={globalStyles.header}>My agenda</Text>
       </Card>
       <Agenda
-        items={eventsToShow}
+        items={events}
         renderItem={renderItem}
       />
     </View>

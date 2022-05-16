@@ -29,7 +29,7 @@ export const globalStyles = StyleSheet.create({
   picker: {
     width: 150,
     backgroundColor: 'white',
-    height: 35 
+    height: 35
   },
   header: {
     fontSize: 20,
@@ -59,5 +59,10 @@ export const globalStyles = StyleSheet.create({
   },
   textSmall: {
     fontSize: 10
+  },
+  lineContainer : {
+    flexDirection: 'row', 
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

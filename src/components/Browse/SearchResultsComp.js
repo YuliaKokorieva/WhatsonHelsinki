@@ -6,7 +6,7 @@ import { useFocusEffect } from '@react-navigation/native'
 import FlatListItemComp from './FlatListItemComp.js';
 import { globalStyles } from '../../styles/globalStyles.js';
 
-export default function SearchResultsComp({data, rowVisible}) {
+export default function SearchResultsComp({data}) {
 
   const [activeItem, setActiveItem] = useState('')
   const [keyword, setKeyword] = useState('')
@@ -21,18 +21,7 @@ export default function SearchResultsComp({data, rowVisible}) {
     setDatatoshow(data);
   });
 
-  const sortlist = () => {
-    // console.log(data.length)
 
-    // if (sortby =="title") {
-    //   setDatatoshow(
-    //     data.sort((a,b) => {
-    //     return a.name -b.name
-    //   }))
-    // } else {
-
-    // }
-  }
   
   const listSeparator = () => {
     return (
@@ -46,30 +35,11 @@ export default function SearchResultsComp({data, rowVisible}) {
     <FlatListItemComp item = {item}/>
   )
 
-  // const searchFilterFunction = (text) => {
-  //   if (text) {
-
-  //     const newData = masterData.filter(function (item) {
-  //       console.log(item.name)
-  //       // const itemData = item.name.fi
-  //       //   ? item.name.fi.toUpperCase()
-  //       //   : ''.toUpperCase();
-  //       // const textData = text.toUpperCase();
-  //       // return itemData.indexOf(textData) > -1;
-  //     });
-  //     setFilteredData(newData);
-  //     setKeyword(text);
-  //   } else {
-
-  //     setFilteredData(data);
-  //     console.log(filteredData)
-  //     setKeyword(text);
-  //   }
-  // };
+ 
 
   return (
     <View style={styles.container}>
-      {rowVisible && 
+      {/* {rowVisible && 
       (
         <View style={{flexDirection: 'row', alignItems: 'center', width: '90%'}}>
           <SearchBar
@@ -92,7 +62,7 @@ export default function SearchResultsComp({data, rowVisible}) {
           </Picker>
           <Button title="sort" onPress={sortlist} style={{width: '30%'}}></Button>
         </View>
-      )}
+      )} */}
 
       <FlatList 
         data={datatoshow}

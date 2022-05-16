@@ -1,4 +1,5 @@
 import { getDatabase , push, ref } from 'firebase/database';
+import { Alert } from 'react-native';
 import firebaseApp from '../FirebaseConfig/firebaseconfig.js';
 
 export default function firebaseSaveEvent(event) {
@@ -16,5 +17,6 @@ export default function firebaseSaveEvent(event) {
         "url": event.url
       }
     )
+    Alert.alert(`Event ${event.title} added`)
 }
 

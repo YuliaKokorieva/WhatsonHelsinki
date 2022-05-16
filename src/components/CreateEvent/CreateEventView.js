@@ -20,13 +20,18 @@ export default function CreateEventView() {
   const [location, setLocation] = useState({})
 
   const calculateEnd = (uievent) => {
-    let end = new Date((Date.parse(uievent.start)+ uievent.duration*60*1000)).toISOString()
-    return end;
+    if (uievent.start && uievent.duration) { 
+      let end = new Date((Date.parse(uievent.start)+ uievent.duration*60*1000)).toISOString()
+      return end;
+      } else {
+        return null
+      }
   }
 
   function getLocation(address) {
-    const access_key_mapquest=ACCESS_KEY_MAPQUEST
-  
+    const access_key_mapquest = 'IB180O9hQIKzNnLGzCxHGsQGeOUALLyt'
+
+
     fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=${access_key_mapquest}`, {
       method: "POST",
       headers: {
@@ -47,23 +52,37 @@ export default function CreateEventView() {
   }
 
   const transformEvent = () => {
-    let loc=getLocation(uievent.address)
+    let loc = {
+      lat: null,
+      lon: null
+    }
+    if (uievent.address) {
+      let coordinates =  getLocation(uievent.address)
+      loc.lat=coordinates.lat
+      loc.lon=coordinates.lon
+    }
+   
     return ({
       id: Date.now(),
       title: uievent.title,
       description: uievent.description,
       start: uievent.start,
       end: calculateEnd(uievent),
-      location: {lat: loc.lat, lon: loc.lon},
+      location: { lat: loc.lat, lon: loc.lon },
       address: uievent.address,
       url: uievent.url
     })
+    
   }
 
   const saveEvent =  () => {
     let event = transformEvent(uievent)
-    firebaseSaveEvent(event)
-    Alert.alert(`Event ${event.title} created`)
+    if (!event.title) {
+      Alert.alert(`Title can't be empty!`)
+    } else {
+      firebaseSaveEvent(event)
+      Alert.alert(`Event ${event.title} created`)
+    }
 
     setUievent({
       title: "",
