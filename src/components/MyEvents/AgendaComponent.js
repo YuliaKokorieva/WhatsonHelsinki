@@ -12,6 +12,7 @@ export default function AgendaComponent() {
   
   const [cardOpen, setCardOpen] = useState(false)
   const [modalData, setModalData] = useState({})
+  const [eventsToShow, setEventsToShow] = useState(events)
 
   //sample data in case fetching doesn't work
   let events = {
@@ -37,20 +38,27 @@ export default function AgendaComponent() {
        }
       //  )
 
-  useEffect(()=> {
-    console.log('getting data')
+  useFocusEffect(()=> {
     getData()
-  },[])
+  })
 
   const getData = () => {
-    let rawEvents = Object.values(firebaseGetAllEvents())
-    for (let i=0; i<rawEvents.length; i++) {
-      let strTime = rawEvents[i].start.split('T')[0]
-      if (!events[strTime]) {
-        events[strTime] = []
+    let fbevents = firebaseGetAllEvents()
+ 
+    setTimeout(function() {
+
+      let rawEvents = Object.values(fbevents)
+      for (let i=0; i<rawEvents.length; i++) {
+        if (rawEvents[i].start) {
+          let strTime = rawEvents[i].start.split('T')[0]
+          if (!events[strTime]) {
+            events[strTime] = []
+          }
+          events[strTime].push(rawEvents[i])
+        }
       }
-      events[strTime].push(rawEvents[i])
-    }
+      setEventsToShow(events)
+    }, 3000)
   }
 
   const renderItem = (item) => {
@@ -88,7 +96,7 @@ export default function AgendaComponent() {
         <Text style={globalStyles.header}>My agenda</Text>
       </Card>
       <Agenda
-        items={events}
+        items={eventsToShow}
         renderItem={renderItem}
       />
     </View>
